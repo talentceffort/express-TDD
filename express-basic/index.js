@@ -1,22 +1,19 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
-
 // 미들웨어는 함수들의 연속
+const users = [
+  { id:1, name: 'alice' },
+  { id:2, name: 'bek' },
+  { id:3, name: 'chris' },
+];
 
+app.use(morgan('dev'));
 
-function commonmw (req, res, next) {
-  console.log('commonmw')
-  next(new Error('error ouccered'))
-}
-
-function errormw(err, req, res, next) {
-  console.log(err.message)
-  // 에러 처리
-  next()
-}
-
-app.use(commonmw)
-app.use(errormw)
+// 라우팅 부분.
+app.get("/users", function (req, res) {
+  res.send(users)
+});
 
 app.listen(3500, function() {
   console.log('Server is running');
