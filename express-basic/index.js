@@ -18,3 +18,5 @@ app.get("/users", function (req, res) {
 app.listen(3500, function() {
   console.log('Server is running');
 })
+
+module.exports = app
